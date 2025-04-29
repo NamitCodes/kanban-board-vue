@@ -6,6 +6,20 @@
 import Board from './components/Board.vue';
 
 export default {
+  created() {
+    const saved = localStorage.getItem("kanban-board");
+    if (saved) {
+      this.columns = JSON.parse(saved);
+    }
+  },
+  watch: {
+    columns: {
+      deep: true,
+      handler(newColumns) {
+        localStorage.setItem("kanban-board", JSON.stringify(newColumns));
+      }
+    }
+  },
   components: { Board },
   data() {
     return {
