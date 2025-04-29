@@ -1,47 +1,29 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <Board :columns="columns"></Board>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
+<script>
+import Board from './components/Board.vue';
+
+export default {
+  components: { Board },
+  data() {
+    return {
+      columns: [
+        { col_id: 1, name: "To Do", tasks: [{ task_id: 1, task_text: "Start learning Vue JS" }] },
+        { col_id: 2, name: "In Progress", tasks: [{ task_id: 2, task_text: "In Progress Ka Task" }] },
+        { col_id: 3, name: "Done", tasks: [{ task_id: 3, task_text: "Done Ka Task" }, { task_id: 4, task_text: "Done Ka doosra Task" }] }
+      ]
+    }
+  }
 }
+</script>
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f5f7;
+  margin: 0;
+  padding: 0;
 }
 </style>
