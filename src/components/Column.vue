@@ -3,8 +3,19 @@
         <div class="column_title">
             <h2>{{ column.name }}</h2>
         </div>
-        <Task v-for="task in column.tasks" :task="task" :key="task.task_id" :column-id="column.col_id"
-            @delete-task="deleteTask"></Task>
+        <!-- <Task 
+        v-for="task in column.tasks" 
+        :task="task" 
+        :key="task.task_id" 
+        :column-id="column.col_id"
+        @delete-task="deleteTask"></Task> -->
+        <draggable v-model="column.tasks" item-key="task_id" group="tasks" class="task-list">
+            <template #item="{ element }">
+                <Task :task="element" :column-id="column.col_id" @delete-task="deleteTask" />
+            </template>
+        </draggable>
+
+
         <form class="add-task" @submit.prevent="addTask">
             <input type="text" v-model="newTaskText" placeholder="Add a new task:">
             <!-- <button @click.prevent="addTask()" class="button">+</button> -->
@@ -15,10 +26,11 @@
 
 <script>
 import Task from './Task.vue';
+import draggable from 'vuedraggable';
 
 export default {
     props: ['column'],
-    components: { Task },
+    components: { Task, draggable },
     methods: {
         handleDrop() {
             const data = JSON.parse(event.dataTransfer.getData("application/json"))
