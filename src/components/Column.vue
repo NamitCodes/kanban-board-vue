@@ -1,6 +1,6 @@
 <template>
     <!-- <div class="column" @dragover.prevent @drop="handleDrop"> -->
-    <div class="column" @touchend="handleDrop">
+    <div class="column" @change="handleDrop">
         <div class="column_title">
             <h2>{{ column.name }}</h2>
         </div>
